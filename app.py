@@ -9,16 +9,21 @@ from linebot.exceptions import (
 )
 from linebot.models import *
 
+#self
+import mongodb
+import re
+
+
 app = Flask(__name__)
 
-# 必須放上自己的Channel Access Token
+# Channel Access Token
 line_bot_api = LineBotApi('/YdOJvjT4og6YuQowSzdJEZDYd9b2mJ3pbfnw1lPcnhyBKL/uCtSihzpmWYWfQz73UIlxxmojN5KPhGzsLdAN8v5CDXV3lGtqFzBYuwr4rCabiQTQUNsPjRdv+YmDsDG/9ClwwKmBTdyun+IKWyNWQdB04t89/1O/w1cDnyilFU=')
-# 必須放上自己的Channel Secret
+# Channel Secret
 handler = WebhookHandler('535b63b5ac03898a88ad322cca64f395')
-
+# User id
 line_bot_api.push_message('U34ec65fa99a75eac948509e49894839a', TextSendMessage(text='start, yo~'))
 
-# 監聽所有來自 /callback 的 Post Request
+# listening to /callback Post Request
 @app.route("/callback", methods=['POST'])
 def callback():
     # get X-Line-Signature header value
@@ -39,8 +44,8 @@ def callback():
 #訊息傳遞區塊
 @handler.add(MessageEvent, message=TextMessage)
 def handle_message(event):
-    message = TextSendMessage(text=event.message.text)
-    line_bot_api.reply_message(event.reply_token,message)
+    user_enter_word = TextSendMessage(text=event.message.text)
+    line_bot_api.reply_message(event.reply_token,user_enter_word)
 
 #主程式
 import os
