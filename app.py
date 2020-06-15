@@ -41,11 +41,18 @@ def callback():
 
     return 'OK'
 
-#訊息傳遞區塊
+#send message
 @handler.add(MessageEvent, message=TextMessage)
 def handle_message(event):
     user_enter_word = TextSendMessage(text=event.message.text)
     line_bot_api.reply_message(event.reply_token,user_enter_word)
+    
+    #read db
+    #mongodb.read_temp_humi()
+    profile = line_bot_api.get_profile(event.source.user_id)
+    uid = profile.user_id
+    #line_bot_api.push_message(uid, TextSendMessage(mongodb.read_temp_humi())
+    line_bot_api.push_message(uid, TextSendMessage('have readed')
 
 #主程式
 import os
