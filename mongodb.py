@@ -12,7 +12,12 @@ def constructor():
     return db
 
 def test_connect(): 
-    db=constructor()
-    coll = db[table_name]
-    return coll.count_documents({})
+    try:
+        db=constructor()
+        coll = db[table_name]
+        coll.count_documents({})
+        return 0
+    except InvalidSignatureError:
+        return 400
+
 
