@@ -48,12 +48,12 @@ def handle_message(event):
     uid = profile.user_id #使用者ID
     
     #event.message.text
-    #user_enter_word = TextSendMessage(text=event.message.text)
-    #line_bot_api.reply_message(event.reply_token,user_enter_word)
+    user_enter_word = TextSendMessage(text=event.message.text)
+    line_bot_api.reply_message(event.reply_token,user_enter_word)
     
     #read db
     #stat = mongodb.test_connect()
-    line_bot_api.push_message(uid, TextSendMessage('hyg'))
+    #line_bot_api.push_message(uid, TextSendMessage('hyg'))
 
 #主程式
 if __name__ == "__main__":
