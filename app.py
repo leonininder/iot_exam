@@ -54,7 +54,7 @@ def handle_message(event):
     
     #read db
     stat = mongodb.test_connect()
-    line_bot_api.push_message(uid, TextSendMessage('stat:' + stat))
+    line_bot_api.push_message(uid, TextSendMessage(stat))
 
  #   # 先判斷是否是使用者要用來存股票的
  #   if re.match('[+][0-9]{4}',usespeak):
