@@ -22,4 +22,10 @@ def test_connect():
     except InvalidSignatureError:
         return 400
 
+def get_data(): 
+    try:
+        coll = constructor()
+        return list(coll.find())
+    except InvalidSignatureError:
+        return 401
 
