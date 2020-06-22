@@ -53,22 +53,22 @@ def handle_message(event):
     usespeak = str(event.message.text) #使用者講的話
     
     #read db
-    stat = mongodb.test_connect()
-    line_bot_api.push_message(uid, TextSendMessage(stat))
+    #stat = mongodb.test_connect()
+    #line_bot_api.push_message(uid, TextSendMessage(stat))
 
- #   # 先判斷是否是使用者要用來存股票的
- #   if re.match('[+][0-9]{4}',usespeak):
- #       line_bot_api.push_message(uid, TextSendMessage('很熱'))
- #   elif re.match('[-][0-9]{4}',usespeak): # 刪除存在資料庫裡面的股票
- #       line_bot_api.push_message(uid, TextSendMessage('很冷'))
- #   else:
- #       data = mongodb.get_data()
- #       for i in data:
- #           temp = i['temp']
- #           humi = i['humi']
- #           line_bot_api.push_message(uid, TextSendMessage('目前溫度：' + temp + ', 目前濕度：' + humi))
- #   
- #   return 0
+    # 先判斷是否是使用者要用來存股票的
+    if re.match('[+][0-9]{4}',usespeak):
+        line_bot_api.push_message(uid, TextSendMessage('很熱'))
+    elif re.match('[-][0-9]{4}',usespeak): # 刪除存在資料庫裡面的股票
+        line_bot_api.push_message(uid, TextSendMessage('很冷'))
+    else:
+        data = mongodb.get_data()
+        for i in data:
+            temp = i['temp']
+            humi = i['humi']
+            line_bot_api.push_message(uid, TextSendMessage('目前溫度：' + str(temp) + ', 目前濕度：' + str(humi)))
+    
+    return 0
 
 
 #主程式
