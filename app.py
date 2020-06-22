@@ -50,11 +50,11 @@ def handle_message(event):
     ### 抓到顧客的資料 ###
     profile = line_bot_api.get_profile(event.source.user_id)
     uid = profile.user_id #使用者ID
-    usespeak=str(event.message.text) #使用者講的話
+    usespeak = str(event.message.text) #使用者講的話
     
     #read db
     stat = mongodb.test_connect()
-    line_bot_api.push_message(uid, TextSendMessage(stat))
+    line_bot_api.push_message(uid, TextSendMessage('stat:' + stat))
 
     # 先判斷是否是使用者要用來存股票的
     if re.match('[+][0-9]{4}',usespeak):
@@ -64,9 +64,10 @@ def handle_message(event):
     else:
         data = mongodb.get_data()
         for i in data:
-        temp = i['temp']
-        humi = i['humi']
-        line_bot_api.push_message(uid, TextSendMessage('目前溫度：' + temp + ', 目前濕度：' + humi))
+            temp = i['temp']
+            humi = i['humi']
+            line_bot_api.push_message(uid, TextSendMessage('目前溫度：' + temp + ', 目前濕度：' + humi))
+    
     return 0
 
 
