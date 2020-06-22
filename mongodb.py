@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 from pymongo import MongoClient
+import pymongo
 import urllib.parse
 import datetime
 
