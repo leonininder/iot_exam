@@ -40,16 +40,17 @@ def callback():
         abort(400)
 
     return 'OK'
-    
+
 
 #訊息傳遞區塊
 @handler.add(MessageEvent, message=TextMessage)
 def handle_message(event):
-    message = TextSendMessage(text=event.message.text)
-    line_bot_api.reply_message(event.reply_token,message)
+    #message = TextSendMessage(text=event.message.text)
+    #line_bot_api.reply_message(event.reply_token,message)
+    
     #read db
-    #stat = mongodb.test_connect()
-    #line_bot_api.push_message(uid, TextSendMessage('hyg'))
+    stat = mongodb.test_connect()
+    line_bot_api.push_message(uid, TextSendMessage(stat))
 
 
 #主程式
