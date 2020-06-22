@@ -47,10 +47,13 @@ def callback():
 def handle_message(event):
     #message = TextSendMessage(text=event.message.text)
     #line_bot_api.reply_message(event.reply_token,message)
+    ### 抓到顧客的資料 ###
+    profile = line_bot_api.get_profile(event.source.user_id)
+    uid = profile.user_id #使用者ID
     
     #read db
     stat = mongodb.test_connect()
-    line_bot_api.push_message(uid, TextSendMessage('test'))
+    line_bot_api.push_message(uid, TextSendMessage(stat))
 
 
 #主程式
