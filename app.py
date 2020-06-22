@@ -53,7 +53,7 @@ def handle_message(event):
     
     #read db
     stat = mongodb.test_connect()
-    line_bot_api.push_message(uid, TextSendMessage(stat))
+    line_bot_api.push_message(uid, TextSendMessage('hyg'))
 
 #主程式
 if __name__ == "__main__":
