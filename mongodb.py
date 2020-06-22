@@ -25,7 +25,8 @@ def test_connect():
 def get_data(): 
     try:
         coll = constructor()
-        return list(coll.find())
+        re_coll = list(coll.find())
+        return re_coll
     except InvalidSignatureError:
         return 401
 
