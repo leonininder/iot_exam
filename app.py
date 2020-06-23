@@ -57,17 +57,65 @@ def handle_message(event):
     #line_bot_api.push_message(uid, TextSendMessage(stat))
 
     # 先判斷是否是使用者要用來存股票的
-    if re.match('[+][0-9]{4}',usespeak):
-        line_bot_api.push_message(uid, TextSendMessage('很熱'))
-    elif re.match('[-][0-9]{4}',usespeak): # 刪除存在資料庫裡面的股票
-        line_bot_api.push_message(uid, TextSendMessage('很冷'))
-    else:
-        data = mongodb.get_data()
-        for i in data:
-            temp = i['temp']
-            humi = i['humi']
-            line_bot_api.push_message(uid, TextSendMessage('目前溫度：' + str(temp) + ', 目前濕度：' + str(humi)))
+    #if re.match('[+][0-9]{4}',usespeak):
+    #    line_bot_api.push_message(uid, TextSendMessage('很熱'))
+    #elif re.match('[-][0-9]{4}',usespeak): # 刪除存在資料庫裡面的股票
+    #    line_bot_api.push_message(uid, TextSendMessage('很冷'))
+    #else:
+    #    data = mongodb.get_data()
+    #   for i in data:
+    #        temp = i['temp']
+    #        humi = i['humi']
+    #        line_bot_api.push_message(uid, TextSendMessage('目前溫度：' + str(temp) + ', 目前濕度：' + str(humi)))
     
+    temp_22 = '葡萄酒要變酸拉'
+    temp_21 = '溫室效應沒酒喝'
+    temp_20 = '預計3年6個月發酵完成'
+    temp_19 = '發酵趨緩'
+    temp_18 = '冷到不想發笑'
+
+    humi_76 = '這濕度會發霉'
+    humi_73 = '除濕機自動運轉'
+    humi_70 = '完美濕度'
+    humi_67 = '地球暖化濕度不足'
+    humi_64 = '水分不足'
+
+    send_str = ''
+
+    #get temp an humi
+    data = mongodb.get_data()
+    for i in data:
+        temp = i['temp']
+        humi = i['humi']
+        #line_bot_api.push_message(uid, TextSendMessage('目前溫度：' + str(temp) + ', 目前濕度：' + str(humi)))
+    
+    if temp >= 22.0:
+        send_str = temp_22
+    elif temp >= 21.0:
+        send_str = temp_21
+    elif temp >= 20.0:
+        send_str = temp_20
+    elif temp >= 19.0:
+        send_str = temp_19
+    else:
+        send_str = temp_18
+
+    send_str += ', '
+
+    if humi >= 76.0:
+        send_str += humi_76
+    elif temp >= 73.0:
+        send_str += humi_73
+    elif temp >= 70.0:
+        send_str += humi_70
+    elif temp >= 67.0:
+        send_str += humi_67
+    else:
+        send_str += humi_64
+
+    #print(send_str)
+    ine_bot_api.push_message(uid, TextSendMessage(send_str))
+
     return 0
 
 
