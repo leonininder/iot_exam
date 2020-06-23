@@ -87,7 +87,7 @@ def handle_message(event):
     for i in data:
         temp = i['temp']
         humi = i['humi']
-        #line_bot_api.push_message(uid, TextSendMessage('目前溫度：' + str(temp) + ', 目前濕度：' + str(humi)))
+        line_bot_api.push_message(uid, TextSendMessage('目前溫度：' + str(temp) + ', 目前濕度：' + str(humi)))
     
     if temp >= 22.0:
         send_str = temp_22
