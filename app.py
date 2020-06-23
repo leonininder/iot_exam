@@ -84,6 +84,8 @@ def handle_message(event):
 
     #get temp an humi
     data = mongodb.get_data()
+    temp = 0.0
+    humi = 0.0
     for i in data:
         temp = i['temp']
         humi = i['humi']
