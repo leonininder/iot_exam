@@ -81,16 +81,18 @@ def handle_message(event):
     humi_64 = '水分不足'
 
     send_str = ''
+    temp = 0.0
+    humi = 0.0
 
     #get temp an humi
     data = mongodb.get_data()
-    temp = 0.0
-    humi = 0.0
+
     for i in data:
         temp = i['temp']
         humi = i['humi']
         line_bot_api.push_message(uid, TextSendMessage('目前溫度：' + str(temp) + ', 目前濕度：' + str(humi)))
     
+    line_bot_api.push_message(uid, TextSendMessage('test1' + str(temp) + ', test2' + str(humi)))
     if temp >= 22.0:
         send_str = temp_22
     elif temp >= 21.0:
